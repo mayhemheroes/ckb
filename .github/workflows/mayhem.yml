@@ -7,6 +7,10 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  syscall_exec_MAYHEMFILE: syscall_exec.mayhemfile
+  data0_MAYHEMFILE: data0.mayhemfile 
+  data1_MAYHEMFILE: data1.mayhemfile
+
 
 jobs:
   build:

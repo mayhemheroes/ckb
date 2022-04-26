@@ -13,8 +13,7 @@ cmds:
     # Command used to start the target, "@@" is the input file
     # (when "@@" is omitted Mayhem defaults to stdin inputs)
     - cmd: /syscall_exec
-    - cmd: /transaction_scripts_verifier_data0
-    - cmd: /transaction_scripts_verifier_data1
+
 
  
 
