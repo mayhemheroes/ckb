@@ -15,6 +15,6 @@ cmds:
     - cmd: /syscall_exec
     - cmd: /transaction_scripts_verifier_data0
     - cmd: /transaction_scripts_verifier_data1
-    - cmd: /conditional_assign_u16
+
  
 
