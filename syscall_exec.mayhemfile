@@ -5,7 +5,7 @@ project: ckb
 target: ckb
 
 # Base image to run the binary in.
-image: ghcr.io/prateekvishnu/ckb:latest
+# image: ghcr.io/prateekvishnu/ckb:latest
 
 # List of commands used to test the target
 cmds:
