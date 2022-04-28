@@ -7,9 +7,9 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  syscall_exec_MAYHEMFILE: syscall_exec.mayhemfile
-  data0_MAYHEMFILE: data0.mayhemfile 
-  data1_MAYHEMFILE: data1.mayhemfile
+  syscall_exec_MAYHEMFILE: Mayhem/syscall_exec.mayhemfile
+  data0_MAYHEMFILE: Mayhem/data0.mayhemfile 
+  data1_MAYHEMFILE: Mayhem/data1.mayhemfile
 
 
 jobs:
@@ -49,11 +49,25 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Start analysis
+      - name: Start analysis for syscall_exec
         uses: ForAllSecure/mcode-action@v1
         with:
           mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
-          args: --image ${{ steps.meta.outputs.tags }}
+          args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.syscall_exec_MAYHEMFILE }}
+          sarif-output: sarif
+          
+      - name: Start analysis for data0
+        uses: ForAllSecure/mcode-action@v1
+        with:
+          mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
+          args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.data0_MAYHEMFILE }}
+          sarif-output: sarif
+          
+      - name: Start analysis for data1
+        uses: ForAllSecure/mcode-action@v1
+        with:
+          mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
+          args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.data1_MAYHEMFILE }}
           sarif-output: sarif
 
       - name: Upload SARIF file(s)
