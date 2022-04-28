@@ -12,4 +12,4 @@ cmds:
 
     # Command used to start the target, "@@" is the input file
     # (when "@@" is omitted Mayhem defaults to stdin inputs)
-    - cmd: /data0
+    - cmd: /transaction_scripts_verifier_data0
