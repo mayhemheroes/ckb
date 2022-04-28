@@ -2,7 +2,7 @@
 project: ckb
 
 # Target name (should be unique within the project)
-target: ckb
+target: data0
 
 # Base image to run the binary in.
 # image: ghcr.io/prateekvishnu/ckb:latest
