@@ -2,7 +2,7 @@
 project: ckb
 
 # Target name (should be unique within the project)
-target: ckb
+target: syscall-exec
 
 # Base image to run the binary in.
 # image: ghcr.io/prateekvishnu/ckb:latest
