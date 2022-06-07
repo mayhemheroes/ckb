@@ -4,9 +4,6 @@ project: ckb
 # Target name (should be unique within the project)
 target: data0
 
-# Base image to run the binary in.
-# image: ghcr.io/prateekvishnu/ckb:latest
-
 # List of commands used to test the target
 cmds:
 
