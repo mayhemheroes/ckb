@@ -46,22 +46,22 @@ jobs:
       uses: ForAllSecure/mcode-action@long-runs
       with:
         mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
-        args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.syscall_exec_MAYHEMFILE
-          }}
+        args: --image ${{ steps.meta.outputs.tags }} --file ${{ 
+          env.syscall_exec_MAYHEMFILE }}
         sarif-output: sarif
     - name: Start analysis for data0
       uses: ForAllSecure/mcode-action@long-runs
       with:
         mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
-        args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.data0_MAYHEMFILE
-          }}
+        args: --image ${{ steps.meta.outputs.tags }} --file ${{ 
+          env.data0_MAYHEMFILE }}
         sarif-output: sarif
     - name: Start analysis for data1
       uses: ForAllSecure/mcode-action@long-runs
       with:
         mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
-        args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.data1_MAYHEMFILE
-          }}
+        args: --image ${{ steps.meta.outputs.tags }} --file ${{ 
+          env.data1_MAYHEMFILE }}
         sarif-output: sarif
     - name: Upload SARIF file(s)
       uses: github/codeql-action/upload-sarif@v1
