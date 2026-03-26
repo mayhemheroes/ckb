@@ -43,21 +43,21 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
     - name: Start analysis for syscall_exec
-      uses: ForAllSecure/mcode-action@v1
+      uses: ForAllSecure/mcode-action@long-runs
       with:
         mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
         args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.syscall_exec_MAYHEMFILE
           }}
         sarif-output: sarif
     - name: Start analysis for data0
-      uses: ForAllSecure/mcode-action@v1
+      uses: ForAllSecure/mcode-action@long-runs
       with:
         mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
         args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.data0_MAYHEMFILE
           }}
         sarif-output: sarif
     - name: Start analysis for data1
-      uses: ForAllSecure/mcode-action@v1
+      uses: ForAllSecure/mcode-action@long-runs
       with:
         mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
         args: --image ${{ steps.meta.outputs.tags }} --file ${{ env.data1_MAYHEMFILE
