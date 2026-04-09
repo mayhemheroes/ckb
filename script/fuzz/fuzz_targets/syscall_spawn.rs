@@ -77,7 +77,7 @@ fn run(data: &[u8]) {
 
     let data: Bytes = (Vec::from(PROGRAM_DATA)).into();
     let script = Script::new_builder()
-        .hash_type(ScriptHashType::Data2.into())
+        .hash_type(ScriptHashType::Data2)
         .code_hash(CellOutput::calc_data_hash(&data))
         .build();
     let dep_cell = CellMetaBuilder::from_cell_output(

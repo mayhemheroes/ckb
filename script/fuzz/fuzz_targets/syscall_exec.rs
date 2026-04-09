@@ -112,7 +112,7 @@ fn run(data: FuzzData) {
         .build();
 
     let exec_caller_script = Script::new_builder()
-        .hash_type(ScriptHashType::Data1.into())
+        .hash_type(ScriptHashType::Data1)
         .code_hash(CellOutput::calc_data_hash(&exec_caller_cell_data))
         .build();
     let output = CellOutputBuilder::default()
@@ -123,7 +123,7 @@ fn run(data: FuzzData) {
 
     let transaction = TransactionBuilder::default()
         .input(input)
-        .set_witnesses(vec![exec_callee_cell_data.into()])
+        .set_witnesses(vec![exec_callee_cell_data.clone().into()])
         .build();
 
     let dummy_cell = CellMetaBuilder::from_cell_output(output, Bytes::new())
