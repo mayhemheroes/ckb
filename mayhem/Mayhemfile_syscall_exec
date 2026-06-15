@@ -1,0 +1,9 @@
+# Mayhem target: ckb-script's syscall_exec fuzzer (libFuzzer, built by mayhem/build.sh via cargo-fuzz
+# at /mayhem/syscall_exec). Feeds an `arbitrary`-derived FuzzData driving the CKB-VM `exec` syscall
+# through ckb_script::TransactionScriptsVerifier::verify with the in-tree exec_caller/exec_callee
+# RISC-V programs. `target:` preserves the old fork name `syscall-exec`.
+project: ckb
+target: syscall-exec
+cmds:
+  - cmd: /mayhem/syscall_exec
+    libfuzzer: true

@@ -1,0 +1,8 @@
+# Mayhem target: ckb-script's syscall_spawn fuzzer (libFuzzer, built by mayhem/build.sh via
+# cargo-fuzz at /mayhem/syscall_spawn). Drives the CKB-VM `spawn` syscall through
+# ckb_script::TransactionScriptsVerifier::verify. New upstream target (not in the old fork).
+project: ckb
+target: syscall-spawn
+cmds:
+  - cmd: /mayhem/syscall_spawn
+    libfuzzer: true

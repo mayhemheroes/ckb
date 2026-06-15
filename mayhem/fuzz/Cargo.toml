@@ -1,0 +1,75 @@
+# mayhem/fuzz — ADDITIVE cargo-fuzz crate for the Mayhem two-branch port.
+#
+# WHY THIS EXISTS (instead of building upstream script/fuzz as-is):
+# The upstream node crates (ckb-types 1.1.2, ckb-traits 1.1.1, ...) require rustc >= 1.95.0, which
+# forces a newer nightly. Under that newer rustc the UPSTREAM fuzz targets in script/fuzz/ FAIL to
+# compile: `error[E0283]: type annotations needed` on `.hash_type(ScriptHashType::DataN.into())` —
+# upstream commit e410c25d1 "feat: impl from/into for gen-type" added a second `Into<Byte>` impl, so
+# `ScriptHashType::DataN.into()` is now ambiguous (the redundant `.into()` no longer infers). This is
+# inherent to the upstream code at this commit regardless of which >=1.95.0 toolchain is used.
+#
+# To keep the integration PURELY ADDITIVE (we never touch any upstream file), this crate carries
+# verbatim copies of all five upstream fuzz targets with the SINGLE trivial fix the compiler itself
+# suggests: drop the redundant `.into()` (the receiver is already `ScriptHashType: Into<Byte>`). The
+# FUZZED code is unchanged — the targets still drive the real `ckb_script::TransactionScriptsVerifier`
+# (CKB-VM RISC-V interpreter over lock/type scripts and the exec/spawn syscalls) via path deps on the
+# upstream node crates. include_bytes! paths point back at the real upstream program/testdata blobs.
+#
+# Target names are PRESERVED exactly (transaction_scripts_verifier_data{0,1,2}, syscall_exec,
+# syscall_spawn) so the Mayhem target set stays in lock-step with upstream.
+[package]
+name = "ckb-script-fuzz-mayhem"
+version = "0.0.1"
+license = "MIT"
+authors = ["Nervos Core Dev <dev@nervos.org>"]
+edition = "2024"
+description = "additive ckb-script fuzz targets (Mayhem)"
+homepage = "https://github.com/nervosnetwork/ckb"
+repository = "https://github.com/nervosnetwork/ckb"
+rust-version = "1.95.0"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+arbitrary = { version = "1", features = ["derive"] }
+libfuzzer-sys = { version = "0.4.0", features = ["arbitrary-derive"] }
+ckb-traits = { path = "../../traits" }
+ckb-types = { path = "../../util/types" }
+ckb-script = { path = "../../script" }
+ckb-chain-spec = { path = "../../spec" }
+
+# Self-contained workspace so it stays independent of the node workspace.
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "transaction_scripts_verifier_data0"
+path = "fuzz_targets/transaction_scripts_verifier_data0.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "transaction_scripts_verifier_data1"
+path = "fuzz_targets/transaction_scripts_verifier_data1.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "transaction_scripts_verifier_data2"
+path = "fuzz_targets/transaction_scripts_verifier_data2.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "syscall_exec"
+path = "fuzz_targets/syscall_exec.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "syscall_spawn"
+path = "fuzz_targets/syscall_spawn.rs"
+test = false
+doc = false

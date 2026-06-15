@@ -1,0 +1,9 @@
+# Mayhem target: ckb-script's transaction_scripts_verifier_data0 fuzzer (libFuzzer, built by
+# mayhem/build.sh via cargo-fuzz at /mayhem/transaction_scripts_verifier_data0). Drives
+# ckb_script::TransactionScriptsVerifier::verify over a Data-hash-type lock script whose code is the
+# raw fuzz input. `target:` preserves the old fork name `data0`.
+project: ckb
+target: data0
+cmds:
+  - cmd: /mayhem/transaction_scripts_verifier_data0
+    libfuzzer: true
